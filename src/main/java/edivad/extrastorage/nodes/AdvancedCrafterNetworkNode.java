@@ -296,7 +296,7 @@ public class AdvancedCrafterNetworkNode extends NetworkNode implements ICrafting
     public int getMaximumSuccessfulCraftingUpdates()
     {
         int speed = getTierSpeed();
-        if(hasConnectedInventory())
+        if(Config.AdvancedCrafter.UNIFORMLY_DISTRIBUTE_PROCESSING.get() && hasConnectedInventory())
             return Math.min(speed, getConnectedInventory().getSlots());
         return speed;
     }
@@ -305,7 +305,7 @@ public class AdvancedCrafterNetworkNode extends NetworkNode implements ICrafting
         int upgradesCount = upgrades.getUpgradeCount(UpgradeItem.Type.SPEED);
         if(tier.equals(CrafterTier.IRON))
             return upgradesCount + tier.getCraftingSpeed();
-        return (upgradesCount * (tier.getCraftingSpeed() / 5)) + tier.getCraftingSpeed();//PREV Min:1 Max:5
+        return (upgradesCount * (tier.getCraftingSpeed() / 5)) + tier.getCraftingSpeed();
     }
 
     @Nullable
